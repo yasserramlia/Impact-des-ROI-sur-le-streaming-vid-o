@@ -90,3 +90,16 @@ Les valeurs par défaut peuvent être modifiées en tête du script `encode_srd_
 | `BW_LQ` | 50 kbps | Bitrate cible par tuile LQ |
 | `LQ_SCALE` | 4 | Diviseur de résolution LQ (¼ natif) |
 | `MD_SCALE` | 1 | Diviseur de résolution MD (natif) |
+
+## Serveur HTTP
+
+`server.js` est un serveur Node.js natif (zéro dépendance) qui expose :
+
+| URL | Contenu |
+|---|---|
+| `http://localhost:8080/` | Lecteur `player_srd.html` |
+| `http://localhost:8080/tiles/` | Dossier `tiles_output/` |
+| `http://localhost:8080/tiles/manifest_srd.mpd` | Manifest SRD |
+| `http://localhost:8080/tiles/config.json` | Config lecteur |
+
+**Fonctionnalités :** headers CORS complets, support des Range requests (lecture DASH), cache agressif sur les segments `.m4s`, no-cache sur le manifest `.mpd`.
