@@ -46,3 +46,29 @@ VideoROI-Impact/
 ffmpeg -version
 python3 --version
 node --version
+```
+## Utilisation
+
+### 1. Encoder la vidéo
+
+```bash
+./encode_srd_pipeline.sh input.mp4 [cols] [rows]
+
+# Exemple : grille 4×3 (défaut)
+./encode_sr
+d_pipeline.sh video.mp4 4 3
+```
+Le script exécute 7 étapes automatiques :
+1. Pré-scaling de la source vers 1920×1080
+2. Encodage du fond LQ global
+3. Encodage de chaque tuile × 3 qualités (HQ / MD / LQ)
+4. Segmentation DASH de chaque tuile (segments de 4 s)
+5. Segmentation DASH du fond LQ
+6. Génération du manifest SRD unifié (`manifest_srd.mpd`)
+7. Génération de `config.json` pour le lecteur
+
+### 2. Lancer le serveur
+
+```bash
+node server.js          # port 8080 par défaut
+node server.js 9090     # port personnalisé
