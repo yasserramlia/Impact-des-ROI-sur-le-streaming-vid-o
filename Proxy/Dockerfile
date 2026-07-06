@@ -1,1 +1,20 @@
 
+FROM nginx:1.25-alpine
+
+# iproute2 = tc (traffic control)
+# iptables  = marquage des paquets vidéo
+RUN apk add --no-cache iproute2 iptables
+
+# Config nginx
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Script de démarrage avec traffic shaper
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+EXPOSE 80
+
+HEALTHCHECK --interval=15s --timeout=5s --retries=3 \
+  CMD wget -qO- http://localhost/ || exit 1
+
+ENTRYPOINT ["/entrypoint.sh"]
