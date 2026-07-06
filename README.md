@@ -34,3 +34,15 @@ VideoROI-Impact/
         ├── hq/              # Segments haute qualité  (init.mp4, seg*.m4s)
         ├── md/              # Segments qualité moyenne
         └── lq/              # Segments basse qualité
+```
+## Prérequis
+
+* **FFmpeg ≥ 4.x** avec support libx264
+* **Python 3** (calcul de la durée ISO 8601 dans le pipeline)
+* **Node.js ≥ 14** (serveur HTTP, aucune dépendance npm)
+
+```bash
+# Vérification rapide
+ffmpeg -version
+python3 --version
+node --version
