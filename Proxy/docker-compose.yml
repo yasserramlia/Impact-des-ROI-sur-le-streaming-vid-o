@@ -1,1 +1,41 @@
 
+services:
+  proxy:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: videoroi-proxy
+
+    restart: unless-stopped
+
+    ports:
+      - "80:80"
+
+    # ==========================================================
+    #  Régulateur de débit — modifiez ces deux valeurs
+    #
+    #  Formats acceptés : Xmbit  Xkbit  Xgbit
+    #  Exemples :
+    #    BW_GLOBAL=10mbit  BW_VIDEO=2mbit   → WiFi limité
+    #    BW_GLOBAL=0       BW_VIDEO=500kbit → Seuls les segments throttlés
+    #    BW_GLOBAL=5mbit   BW_VIDEO=0       → Limite globale uniquement
+    #    BW_GLOBAL=0       BW_VIDEO=0       → Aucune limitation
+    # ==========================================================
+    environment:
+      BW_GLOBAL: "0"        # débit max total vers le client
+      BW_VIDEO:  "0"        # débit max segments vidéo (.m4s / .mp4)
+
+    # NET_ADMIN indispensable pour que tc et iptables fonctionnent
+    cap_add:
+      - NET_ADMIN
+
+    volumes:
+      - ./logs:/var/log/nginx
+
+    networks:
+      - proxy-net
+
+networks:
+  proxy-net:
+    driver: bridge
