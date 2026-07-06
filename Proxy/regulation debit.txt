@@ -1,1 +1,26 @@
 
+cd ~/Bureau/proxy
+docker compose down
+docker compose build --no-cache
+docker compose up -d
+docker compose logs --tail=20
+
+
+
+
+----------------------------
+environment:
+  BW_GLOBAL: "10mbit"   # débit max total vers le client
+  BW_VIDEO:  "2mbit"    # débit max segments .m4s / .mp4
+
+Scénario	BW_GLOBAL	BW_VIDEO
+
+Aucune limite	0		0
+WiFi correct	10mbit		5mbit	
+4G simulée	5mbit		2mbit
+3G dégradée	2mbit		500kbit
+Seuls les segments throttlés 0	800kbit
+Limite globale uniquement 5mbit	0
+
+Après chaque changement de débit :
+bashdocker compose down && docker compose up -d
