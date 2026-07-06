@@ -103,3 +103,9 @@ Les valeurs par défaut peuvent être modifiées en tête du script `encode_srd_
 | `http://localhost:8080/tiles/config.json` | Config lecteur |
 
 **Fonctionnalités :** headers CORS complets, support des Range requests (lecture DASH), cache agressif sur les segments `.m4s`, no-cache sur le manifest `.mpd`.
+
+## Références
+
+* ISO/IEC 23009-1:2014/Amd 2:2015 — MPEG-DASH SRD
+* O. A. Niamut et al., "MPEG DASH SRD: Spatial Relationship Description", ACM MMSys 2016
+* J. Le Feuvre & C. Concolato, "Tiled-based Adaptive Streaming using MPEG-DASH", ACM MMSys 2016
