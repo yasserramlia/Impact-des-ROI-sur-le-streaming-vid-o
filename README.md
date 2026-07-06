@@ -72,3 +72,8 @@ Le script exécute 7 étapes automatiques :
 ```bash
 node server.js          # port 8080 par défaut
 node server.js 9090     # port personnalisé
+```
+### 3. Ouvrir le lecteur
+```
+http://localhost:8080/
+```
