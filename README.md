@@ -77,3 +77,16 @@ node server.js 9090     # port personnalisé
 ```
 http://localhost:8080/
 ```
+## Paramètres d'encodage
+
+Les valeurs par défaut peuvent être modifiées en tête du script `encode_srd_pipeline.sh` :
+
+| Paramètre | Défaut | Description |
+|---|---|---|
+| `SEG_DUR` | 4 s | Durée d'un segment DASH |
+| `PRESET` | fast | Preset x264 (ultrafast → slow) |
+| `BW_HQ` | 1 800 kbps | Bitrate cible par tuile HQ |
+| `BW_MD` | 600 kbps | Bitrate cible par tuile MD |
+| `BW_LQ` | 50 kbps | Bitrate cible par tuile LQ |
+| `LQ_SCALE` | 4 | Diviseur de résolution LQ (¼ natif) |
+| `MD_SCALE` | 1 | Diviseur de résolution MD (natif) |
