@@ -34,3 +34,33 @@ VideoROI-Impact/
         ├── hq/              # Segments haute qualité  (init.mp4, seg*.m4s)
         ├── md/              # Segments qualité moyenne
         └── lq/              # Segments basse qualité
+
+## Prérequis
+
+* **FFmpeg ≥ 4.x** avec support libx264
+* **Python 3** (calcul de la durée ISO 8601 dans le pipeline)
+* **Node.js ≥ 14** (serveur HTTP, aucune dépendance npm)
+
+```bash
+# Vérification rapide
+ffmpeg -version
+python3 --version
+node --version
+
+## Utilisation
+
+# Encoder la vidéo
+./encode_srd_pipeline.sh input.mp4 [cols] [rows]
+
+# Exemple : grille 4×3 (défaut)
+./encode_srd_pipeline.sh video.mp4 4 3
+
+Le script exécute 7 étapes automatiques :
+
+Pré-scaling de la source vers 1920×1080
+Encodage du fond LQ global
+Encodage de chaque tuile × 3 qualités (HQ / MD / LQ)
+Segmentation DASH de chaque tuile (segments de 4 s)
+Segmentation DASH du fond LQ
+Génération du manifest SRD unifié (manifest_srd.mpd)
+Génération de config.json pour le lecteur
